@@ -24,9 +24,9 @@ so the long term objective will be to complete functionalities on this part too.
 
 More specifically, the todo list is:
 
-. Ability to drag and line up icons
-. Event-based signals (for instance, updating trash icon according to its status)
-. Dynamic lookup (no need to restart Awesome to see changes on Desktop)
+* Ability to drag and line up icons
+* Event-based signals (for instance, updating trash icon according to its status)
+* Dynamic update (no need to restart Awesome to see changes on Desktop)
 
 Screenshot
 ----------
