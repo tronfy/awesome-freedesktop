@@ -17,7 +17,7 @@ Description
 This is a port of awesome-freedesktop_ to Awesome_ 3.5+.
 
 Since the introduction of Menubar_ as core library for providing Freedesktop.org menu functionalities in Awesome,
-we can now avoid all the dirty work by just exploiting `menubar.utils` functions.
+we can now avoid all the dirty work by just exploiting ``menubar.utils`` functions.
 
 At the initial status of this port, the menu is pretty much complete, while the desktop icons are very basic,
 so the long term objective will be to complete functionalities on this part too.
