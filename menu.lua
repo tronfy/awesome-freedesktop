@@ -23,9 +23,11 @@ local next       = next
 -- Add support for nix/nixos systems too
 table.insert(menu_gen.all_menu_dirs, "~/.nix-profile/share/applications")
 
--- Expecting an wm_name of awesome omits too many applications and tools
+-- Expecting a wm_name of awesome omits too many applications and tools
 menu_utils.wm_name = ""
 
+-- Menu
+-- freedesktop.menu
 local menu = {}
 
 -- Use MenuBar parsing utils to build a menu for Awesome
