@@ -16,12 +16,6 @@ Description
 
 This is a port of awesome-freedesktop_ to Awesome_ 3.5+.
 
-.. image:: https://www.linx.li/selif/txld59b6.png
-    :width: 475px
-    :height: 475px
-    :align: center
-    :alt: Showcase of Freedesktop support in Awesome 3.5.9, using Adwaita icons
-
 Since the introduction of Menubar_ as core library for providing Freedesktop.org menu functionalities in Awesome,
 we can now avoid all the dirty work by just exploiting `menubar.utils` functions.
 
@@ -34,13 +28,17 @@ More specifically, the todo list is:
 . Event-based signals (for instance, updating trash icon according to its status)
 . Dynamic lookup (no need to restart Awesome to see changes on Desktop)
 
+Screenshot
+----------
+
+.. image:: screenshot.png
+    :align: center
+    :alt: Showcase of Freedesktop support in Awesome 3.5.9, using Adwaita icons
+    
 Installation and usage
 ----------------------
 
 Read the wiki_.
-
-Objectives
-----------
 
 .. _GNU-GPL2: http://www.gnu.org/licenses/gpl-2.0.html
 .. _awesome-freedesktop: https://github.com/terceiro/awesome-freedesktop
