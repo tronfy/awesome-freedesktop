@@ -92,29 +92,44 @@ function desktop.add_single_icon(args, label, icon, onclick)
 
     -- create icon container
     if icon then
-        icon = awful.widget.button({ image = icon })
-        icon:buttons(awful.button({ }, 1, nil, onclick))
         common.width = args.iconsize.width
         common.height = args.iconsize.height
         common.x = desktop_current_pos[s].x
         common.y = desktop_current_pos[s].y
+
+        --icon = awful.widget.button({ image = icon })
+
+        icon = wibox.widget {
+            image = icon,
+            resize = false,
+            widget = wibox.widget.imagebox
+        }
+
+        icon:buttons(awful.button({ }, 1, nil, onclick))
+
         icon_container = wibox(common)
         icon_container:set_widget(icon)
+
         desktop_current_pos[s].y = desktop_current_pos[s].y + args.iconsize.height + 5
     end
 
     -- create label container
     if label then
-        caption = wibox.widget.textbox()
-        caption:fit(args.labelsize.width, args.labelsize.height)
-        caption:set_align("center")
-        caption:set_ellipsize("middle")
-        caption:set_text(label)
-        caption:buttons(awful.button({ }, 1, onclick))
         common.width = args.labelsize.width
         common.height = args.labelsize.height
         common.x = desktop_current_pos[s].x - (args.labelsize.width/2) + args.iconsize.width/2
         common.y = desktop_current_pos[s].y
+
+        caption = wibox.widget {
+            text          = label,
+            align         = "center",
+            forced_width  = common.width,
+            forced_height = common.height,
+            ellipsize     = "middle",
+            widget        = wibox.widget.textbox
+        }
+
+        caption:buttons(awful.button({ }, 1, onclick))
         caption_container = wibox(common)
         caption_container:set_widget(caption)
     end

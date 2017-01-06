@@ -10,8 +10,6 @@
                                                         
 --]]
 
-package.loaded.freedesktop = nil
-
 local freedesktop =
 {
     desktop = require("freedesktop.desktop"),

@@ -2,7 +2,7 @@ Awesome-Freedesktop
 ===================
 
 -------------------------------------------------------------------
-Freedesktop.org menu and desktop icons support for Awesome WM 3.5+
+Freedesktop.org menu and desktop icons support for Awesome WM 4.x
 -------------------------------------------------------------------
 
 :Original author: Antonio Terceiro
@@ -14,7 +14,9 @@ Freedesktop.org menu and desktop icons support for Awesome WM 3.5+
 Description
 -----------
 
-This is a port of awesome-freedesktop_ to Awesome_ 3.5+.
+This is a port of awesome-freedesktop_ to Awesome_ 4.x.
+
+**Note**: if you still have to use branch 3.5.x, you can refer to the commit 2c695a9_. Be aware that it's no longer supported, so update to 4.x ASAP.
 
 Since the introduction of Menubar_ as core library for providing Freedesktop.org menu functionalities in Awesome,
 we can now avoid all the dirty work by just exploiting ``menubar.utils`` functions.
@@ -24,9 +26,11 @@ so the long term objective will be to complete functionalities on this part too.
 
 More specifically, the todo list is:
 
+* A better way to handle desktop icons path
 * Ability to drag and line up icons
-* Event-based signals (for instance, updating trash icon according to its status)
-* Dynamic update (no need to restart Awesome to see changes on Desktop)
+* Event-based signals, in particular:
+  * Updating trash icon according to its status
+  * Dynamic desktop update (no need to restart Awesome to see changes on Desktop)
 
 Screenshot
 ----------
@@ -34,7 +38,7 @@ Screenshot
 .. image:: screenshot.png
     :align: center
     :alt: Showcase of Freedesktop support in Awesome 3.5.9, using Adwaita icons
-    
+
 Installation and usage
 ----------------------
 
@@ -43,5 +47,6 @@ Read the wiki_.
 .. _GNU-GPL2: http://www.gnu.org/licenses/gpl-2.0.html
 .. _awesome-freedesktop: https://github.com/terceiro/awesome-freedesktop
 .. _Awesome: https://github.com/awesomeWM/awesome
+.. _2c695a9: https://github.com/copycat-killer/awesome-freedesktop/tree/2c695a922856e22d117cd80486d6ce67d79a72df
 .. _Menubar: https://github.com/awesomeWM/awesome/tree/master/lib/menubar
 .. _wiki: https://github.com/copycat-killer/awesome-freedesktop/wiki

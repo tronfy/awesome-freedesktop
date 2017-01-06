@@ -34,19 +34,21 @@ local menu = {}
 -- @return awful.menu compliant menu items tree
 function menu.build()
 	local result = {}
-	local menulist = menu_gen.generate()
 
+	menu_gen.generate(function(entries)
+      for k, v in ipairs(entries) do
+        for _, cat in ipairs(result) do
+          if cat[1] == v["category"] then
+            table.insert( cat[2] , { v["name"], v["cmdline"], v["icon"] } )
+            break
+          end
+        end
+      end
+  end)
+
+  -- Add category icons
 	for k,v in pairs(menu_gen.all_categories) do
 		table.insert(result, {k, {}, v["icon"] } )
-	end
-
-	for k, v in ipairs(menulist) do
-		for _, cat in ipairs(result) do
-			if cat[1] == v["category"] then
-				table.insert( cat[2] , { v["name"], v["cmdline"], v["icon"] } )
-				break
-			end
-		end
 	end
 
 	-- Cleanup things a bit
