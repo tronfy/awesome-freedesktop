@@ -30,7 +30,7 @@ More specifically, the todo list is:
 - Ability to drag and line up icons
 - Event-based signals, in particular:
     - Updating trash icon according to its status
-    - Dynamic desktop update (no need to restart Awesome to see changes on Desktop)
+    - Dynamic update (no need to restart Awesome to see changes on desktop)
 
 Screenshot
 ----------
