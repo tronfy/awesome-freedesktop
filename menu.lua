@@ -15,14 +15,22 @@
 local menu_gen   = require("menubar.menu_gen")
 local menu_utils = require("menubar.utils")
 local pairs      = pairs
-local ipairs     = ipairs
 local table      = table
 local string     = string
-local next       = next
 local os         = os
 
--- Add support for nix/nixos systems too
+-- Add support for NixOS systems too
 table.insert(menu_gen.all_menu_dirs, os.getenv("HOME") .. "/.nix-profile/share/applications")
+
+-- Remove non existent paths in order to avoid issues
+local existent_paths = {}
+for k,v in pairs(menu_gen.all_menu_dirs) do
+    if os.execute(string.format("ls %s", v)) then
+        table.insert(existent_paths, v)
+        require("naughty").notify({text = tostring(v)})
+    end
+end
+menu_gen.all_menu_dirs = existent_paths
 
 -- Expecting a wm_name of awesome omits too many applications and tools
 menu_utils.wm_name = ""
@@ -35,11 +43,13 @@ local menu = {}
 -- @return awful.menu compliant menu items tree
 function menu.build()
     local result = {}
+
+    -- Get menu table
     menu_gen.generate(function(entries)
-        for k, v in ipairs(entries) do
-            for _, cat in ipairs(result) do
+        for k, v in pairs(entries) do
+            for _, cat in pairs(result) do
                 if cat[1] == v["category"] then
-                    table.insert( cat[2] , { v["name"], v["cmdline"], v["icon"] } )
+                    table.insert(cat[2] , { v["name"], v["cmdline"], v["icon"] })
                     break
                 end
             end
@@ -52,10 +62,10 @@ function menu.build()
     end
 
     -- Cleanup things a bit
-    for k,v in ipairs(result) do
+    for k,v in pairs(result) do
         -- Remove unused categories
-        if not next(v[2]) then
-            table.remove(result, k)
+        if #v[2] == 0 then
+            --table.remove(result, k)
         else
             --Sort entries alphabetically (by name)
             table.sort(v[2], function (a,b) return string.byte(a[1]) < string.byte(b[1]) end)
