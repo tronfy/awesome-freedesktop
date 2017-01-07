@@ -97,8 +97,6 @@ function desktop.add_single_icon(args, label, icon, onclick)
         common.x = desktop_current_pos[s].x
         common.y = desktop_current_pos[s].y
 
-        --icon = awful.widget.button({ image = icon })
-
         icon = wibox.widget {
             image = icon,
             resize = false,
@@ -243,9 +241,8 @@ function desktop.add_icons(args)
     args.labelsize  = args.labelsize or desktop.labelsize
     args.margin     = args.margin or desktop.margin
 
-    -- trying to fallback on Adwaita if theme.icon_theme
-    -- is not defined; if Adwaita is missing too, no
-    -- icons will be shown
+    -- trying to fallback on Adwaita if theme.icon_theme is not defined
+    -- if Adwaita is missing too, no icons will be shown
     if not theme.icon_theme then
         theme.icon_theme = args.icon_theme or "Adwaita"
     end
