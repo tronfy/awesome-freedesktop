@@ -65,7 +65,7 @@ function menu.build()
     for k,v in pairs(result) do
         -- Remove unused categories
         if #v[2] == 0 then
-            --table.remove(result, k)
+            table.remove(result, k)
         else
             --Sort entries alphabetically (by name)
             table.sort(v[2], function (a,b) return string.byte(a[1]) < string.byte(b[1]) end)
@@ -77,7 +77,7 @@ function menu.build()
     -- Sort categories alphabetically also
     table.sort(result, function(a,b) return string.byte(a[1]) < string.byte(b[1]) end)
 
-	return result
+    return result
 end
 
 return menu
