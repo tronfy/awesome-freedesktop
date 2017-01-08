@@ -10,10 +10,9 @@
                                                         
 --]]
 
-local freedesktop =
-{
-    desktop = require("freedesktop.desktop"),
-    menu    = require("freedesktop.menu")
+return {
+    desktop  = require("freedesktop.desktop"),
+    menu     = require("freedesktop.menu"),
+--    fd_async = require("freedesktop.fd_async"),
+--    appmenu  = require("freedesktop.appmenu")
 }
-
-return freedesktop

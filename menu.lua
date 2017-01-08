@@ -12,22 +12,27 @@
                                                         
 --]]
 
+local awful_menu = require("awful.menu")
 local menu_gen   = require("menubar.menu_gen")
 local menu_utils = require("menubar.utils")
+
+local os         = { execute = os.execute,
+                     getenv  = os.getenv }
 local pairs      = pairs
-local table      = table
-local string     = string
-local os         = os
+local string     = { byte    = string.byte,
+                     format  = string.format }
+local table      = { insert  = table.insert,
+                     remove  = table.remove,
+                     sort    = table.sort }
 
 -- Add support for NixOS systems too
-table.insert(menu_gen.all_menu_dirs, os.getenv("HOME") .. "/.nix-profile/share/applications")
+table.insert(menu_gen.all_menu_dirs, string.format("%s/.nix-profile/share/applications", os.getenv("HOME")))
 
 -- Remove non existent paths in order to avoid issues
 local existent_paths = {}
 for k,v in pairs(menu_gen.all_menu_dirs) do
     if os.execute(string.format("ls %s", v)) then
         table.insert(existent_paths, v)
-        require("naughty").notify({text = tostring(v)})
     end
 end
 menu_gen.all_menu_dirs = existent_paths
@@ -40,44 +45,54 @@ menu_utils.wm_name = ""
 local menu = {}
 
 -- Use MenuBar parsing utils to build a menu for Awesome
--- @return awful.menu compliant menu items tree
-function menu.build()
-    local result = {}
+-- @return awful.menu
+function menu.build(args)
+    local args   = args or {}
+    local before = args.before or {}
+    local after  = args.after or {}
 
-    -- Get menu table
+    local result = {}
+    local _menu  = awful_menu({ items = before })
+
     menu_gen.generate(function(entries)
+        -- Add category icons
+        for k, v in pairs(menu_gen.all_categories) do
+            table.insert(result, { k, {}, v.icon })
+        end
+
+        -- Get items table
         for k, v in pairs(entries) do
             for _, cat in pairs(result) do
-                if cat[1] == v["category"] then
-                    table.insert(cat[2] , { v["name"], v["cmdline"], v["icon"] })
+                if cat[1] == v.category then
+                    table.insert(cat[2], { v.name, v.cmdline, v.icon })
                     break
                 end
             end
         end
+
+        -- Cleanup things a bit
+        for i = #result, 1, -1 do
+            local v = result[i]
+            if #v[2] == 0 then
+                -- Remove unused categories
+                table.remove(result, i)
+            else
+                --Sort entries alphabetically (by name)
+                table.sort(v[2], function (a, b) return string.byte(a[1]) < string.byte(b[1]) end)
+                -- Replace category name with nice name
+                v[1] = menu_gen.all_categories[v[1]].name
+            end
+        end
+
+        -- Sort categories alphabetically also
+        table.sort(result, function(a, b) return string.byte(a[1]) < string.byte(b[1]) end)
+
+        -- Add items to menu
+        for _, v in pairs(result) do _menu:add(v) end
+        for _, v in pairs(after)  do _menu:add(v) end
     end)
 
-    -- Add category icons
-    for k,v in pairs(menu_gen.all_categories) do
-        table.insert(result, {k, {}, v["icon"] } )
-    end
-
-    -- Cleanup things a bit
-    for k,v in pairs(result) do
-        -- Remove unused categories
-        if #v[2] == 0 then
-            table.remove(result, k)
-        else
-            --Sort entries alphabetically (by name)
-            table.sort(v[2], function (a,b) return string.byte(a[1]) < string.byte(b[1]) end)
-            -- Replace category name with nice name
-            v[1] = menu_gen.all_categories[v[1]].name
-        end
-    end
-
-    -- Sort categories alphabetically also
-    table.sort(result, function(a,b) return string.byte(a[1]) < string.byte(b[1]) end)
-
-    return result
+    return _menu
 end
 
 return menu
