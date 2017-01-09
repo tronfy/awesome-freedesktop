@@ -31,7 +31,7 @@ table.insert(menu_gen.all_menu_dirs, string.format("%s/.nix-profile/share/applic
 -- Remove non existent paths in order to avoid issues
 local existent_paths = {}
 for k,v in pairs(menu_gen.all_menu_dirs) do
-    if os.execute(string.format("ls %s", v)) then
+    if os.execute(string.format("ls %s &> /dev/null", v)) then
         table.insert(existent_paths, v)
     end
 end
