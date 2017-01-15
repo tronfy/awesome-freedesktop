@@ -15,6 +15,7 @@
 local awful_menu = require("awful.menu")
 local menu_gen   = require("menubar.menu_gen")
 local menu_utils = require("menubar.utils")
+local icon_theme = require("menubar.icon_theme")
 
 local os         = { execute = os.execute,
                      getenv  = os.getenv }
@@ -47,12 +48,13 @@ local menu = {}
 -- Use MenuBar parsing utils to build a menu for Awesome
 -- @return awful.menu
 function menu.build(args)
-    local args   = args or {}
-    local before = args.before or {}
-    local after  = args.after or {}
+    local args      = args or {}
+    local icon_size = args.icon_size
+    local before    = args.before or {}
+    local after     = args.after or {}
 
-    local result = {}
-    local _menu  = awful_menu({ items = before })
+    local result    = {}
+    local _menu     = awful_menu({ items = before })
 
     menu_gen.generate(function(entries)
         -- Add category icons
@@ -91,6 +93,13 @@ function menu.build(args)
         for _, v in pairs(result) do _menu:add(v) end
         for _, v in pairs(after)  do _menu:add(v) end
     end)
+
+    -- Set icon size
+    if icon_size then
+        for _,v in pairs(menu_gen.all_categories) do
+            v.icon = icon_theme():find_icon_path(v.icon_name, icon_size)
+        end
+    end
 
     return _menu
 end
