@@ -12,7 +12,5 @@
 
 return {
     desktop  = require("freedesktop.desktop"),
-    menu     = require("freedesktop.menu"),
---    fd_async = require("freedesktop.fd_async"),
---    appmenu  = require("freedesktop.appmenu")
+    menu     = require("freedesktop.menu")
 }

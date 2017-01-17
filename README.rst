@@ -16,7 +16,7 @@ Description
 
 This is a port of awesome-freedesktop_ to Awesome_ 4.x.
 
-**Note**: if you still have to use branch 3.5.x, you can refer to the commit 2c695a9_. Be aware that it's no longer supported, so update to 4.x ASAP.
+**Note**: if you still have to use branch 3.5.x, you can refer to the commit 2c695a9_, but be aware that it's no longer supported.
 
 Since the introduction of Menubar_ as core library for providing Freedesktop.org menu functionalities in Awesome,
 we can now avoid all the dirty work by just exploiting ``menubar.utils`` functions.
@@ -37,7 +37,7 @@ Screenshot
 
 .. image:: screenshot.png
     :align: center
-    :alt: Showcase of Freedesktop support in Awesome 3.5.9, using Adwaita icons
+    :alt: Showcase of Freedesktop support in Awesome, using Adwaita icons
 
 Installation and usage
 ----------------------
