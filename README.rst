@@ -6,7 +6,7 @@ Freedesktop.org menu and desktop icons support for Awesome WM 4.x
 -------------------------------------------------------------------
 
 :Original author: Antonio Terceiro
-:Maintainer: Luke Bonham
+:Maintainer: Luca CPZ
 :Version: git
 :License: GNU-GPL2_
 :Source: https://github.com/copycat-killer/awesome-freedesktop
