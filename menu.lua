@@ -65,6 +65,7 @@ function menu.build(args)
     local icon_size  = args.icon_size
     local before     = args.before or {}
     local after      = args.after or {}
+    local sub_menu   = args.sub_menu or false
     local skip_items = args.skip_items or {}
 
     local result     = {}
@@ -106,6 +107,9 @@ function menu.build(args)
         table.sort(result, function(a, b) return string.byte(a[1]) < string.byte(b[1]) end)
 
         -- Add items to menu
+	if sub_menu then
+	    result = {{sub_menu, result}}
+	end
         for _, v in pairs(result) do _menu:add(v) end
         for _, v in pairs(after)  do _menu:add(v) end
     end)
