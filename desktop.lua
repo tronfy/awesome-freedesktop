@@ -78,15 +78,15 @@ function desktop.add_single_icon(args, label, icon, onclick)
 
     -- define icon dimensions and position
     if not dcp[s] then
-        dcp[s] = { x = (screen[s].geometry.x + args.iconsize.width + args.margin.x), y = screen[s].geometry.y + 40 + args.margin.y  }
+        dcp[s] = { x = (screen[s].geometry.x + args.iconsize.width + args.margin.x), y = screen[s].geometry.y + 20 + args.margin.y  }
     end
 
     local tot_height = (icon and args.iconsize.height or 0) + (label and args.labelsize.height or 0)
     if tot_height == 0 then return end
 
-    if dcp[s].y + tot_height > screen[s].geometry.y + screen[s].geometry.height - 40 - args.margin.y then
+    if dcp[s].y + tot_height > screen[s].geometry.y + screen[s].geometry.height - 20 - args.margin.y then
         dcp[s].x = dcp[s].x + args.labelsize.width + args.iconsize.width + args.margin.x
-        dcp[s].y = 40 + args.margin.y
+        dcp[s].y = 20 + args.margin.y
     end
 
     local common = { screen = s, bg = "#00000000", visible = true, type = "desktop" }
